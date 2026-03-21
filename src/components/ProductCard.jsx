@@ -1,7 +1,7 @@
 import './ProductCard.css'
 
 // props
-function ProductCard({ title, description, price, imageUrl }) {
+function ProductCard({ title, description, price, imageUrl = 'https://picsum.photos/600/400' }) {
   return (
     <div id='card-01' className='card'>
         <img src={imageUrl} alt={title}
