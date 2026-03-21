@@ -1,7 +1,11 @@
+import { useState } from 'react'
 import './ProductCard.css'
 
 // props
 function ProductCard({ title, description, price, imageUrl = 'https://picsum.photos/600/400' }) {
+
+    const [isAdded, setIsAdded] = useState(false)
+
   return (
     <div id='card-01' className='card'>
         <img src={imageUrl} alt={title}
@@ -16,8 +20,10 @@ function ProductCard({ title, description, price, imageUrl = 'https://picsum.pho
 
             <p className = "card-footer">
                 <span className="card-price">${price}</span>
-                <button className="card-button">
-                    Agregar al Carrito
+                <button 
+                    onClick={()=> setIsAdded(!isAdded)}
+                    className={isAdded ? 'card-button added': 'card-button'}>
+                        {isAdded ? 'Agregado' : 'Agregar'}
                 </button>
             </p>
          </div>
