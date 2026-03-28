@@ -10,17 +10,20 @@ function App() {
 
   const productsData = [
     {
+      id: '01',
       title: 'Cat Toy',
       description: 'Juguete para gato',
       price: 100,
       imageUrl: 'https://cdn.petsathome.com/public/images/products/900_7111664.jpg',
     },
     {
+      id: '02',
       title: 'Dog Toy',
       description: 'Juguete para perro',
       price: 200,
     },
     {
+      id: '03',
       title: 'Parrot Toy',
       description: 'Juguete para Loro',
       price: 200,
@@ -49,6 +52,7 @@ function App() {
       <div className="card-list">
         {productsData.map((product, index) => (
           <ProductCard
+            id={product.id}
             key={index}
             title={product.title}
             description={product.description}

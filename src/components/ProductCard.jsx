@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './ProductCard.css'
 
 // props
-function ProductCard({ title, description, price, imageUrl = 'https://picsum.photos/600/400', handleAddToCart }) {
+function ProductCard({ id, title, description, price, imageUrl = 'https://picsum.photos/600/400', handleAddToCart }) {
   const [isAdded, setIsAdded] = useState(false)
 
   const handleClick = () => {
@@ -12,7 +12,7 @@ function ProductCard({ title, description, price, imageUrl = 'https://picsum.pho
 
   return (
     <div
-      id="card-01"
+      id={`card-${id}`}
       className="card"
     >
       <img
