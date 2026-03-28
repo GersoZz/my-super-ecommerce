@@ -3,6 +3,7 @@ import './App.css'
 import ProductCard from './components/ProductCard'
 import PromoBanner from './components/PromoBanner'
 import Header from './components/Header'
+import ProductList from './components/ProductList'
 
 function App() {
   const [cartCount, setCartCount] = useState(0)
@@ -49,19 +50,10 @@ function App() {
           totalSeconds={30}
         />
       )}
-      <div className="card-list">
-        {productsData.map((product, index) => (
-          <ProductCard
-            id={product.id}
-            key={index}
-            title={product.title}
-            description={product.description}
-            price={product.price}
-            imageUrl={product.imageUrl}
-            handleAddToCart={handleAddToCart}
-          />
-        ))}
-      </div>
+      <ProductList
+        productsData={productsData}
+        handleAddToCart={handleAddToCart}
+      />
     </>
   )
 }
