@@ -1,7 +1,11 @@
+import { useState } from 'react'
 import './App.css'
 import ProductCard from './components/ProductCard'
+import PromoBanner from './components/PromoBanner'
 
 function App() {
+  const [showPromo, setShowPromo] = useState(true)
+
   const productsData = [
     {
       title: 'Cat Toy',
@@ -22,8 +26,18 @@ function App() {
     },
   ]
 
+  const onClosePromo = () => {
+    setShowPromo(false)
+  }
+
   return (
     <>
+      {showPromo && (
+        <PromoBanner
+          onClose={onClosePromo}
+          totalSeconds={30}
+        />
+      )}
       <div className="card-list">
         {productsData.map((product, index) => (
           <ProductCard
