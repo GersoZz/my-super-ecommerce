@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { CartContext } from '../context/CartContext'
 import './ProductCard.css'
 
 // props
-function ProductCard({ id, title, description, price, imageUrl = 'https://picsum.photos/600/400', handleAddToCart }) {
+function ProductCard({ id, title, description, price, imageUrl = 'https://picsum.photos/600/400' }) {
+  const { handleAddToCart } = useContext(CartContext)
+
   const [isAdded, setIsAdded] = useState(false)
 
   const handleClick = () => {

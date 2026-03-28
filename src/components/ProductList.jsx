@@ -1,6 +1,6 @@
 import ProductCard from './ProductCard'
 
-function ProductList({ productsData, handleAddToCart }) {
+function ProductList({ productsData }) {
   return (
     <div className="card-list">
       {productsData.map((product, index) => (
@@ -11,7 +11,6 @@ function ProductList({ productsData, handleAddToCart }) {
           description={product.description}
           price={product.price}
           imageUrl={product.imageUrl}
-          handleAddToCart={handleAddToCart}
         />
       ))}
     </div>
