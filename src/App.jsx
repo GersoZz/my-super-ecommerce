@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import './App.css'
-import ProductCard from './components/ProductCard'
 import PromoBanner from './components/PromoBanner'
 import Header from './components/Header'
 import ProductList from './components/ProductList'
+import Container from './components/Container'
 
 function App() {
   const [cartCount, setCartCount] = useState(0)
@@ -50,10 +50,22 @@ function App() {
           totalSeconds={30}
         />
       )}
-      <ProductList
-        productsData={productsData}
-        handleAddToCart={handleAddToCart}
-      />
+
+      <Container title="Productos disponibles">
+        <p style={{ fontSize: '1.5rem' }}>Explora nuestra selección de productos disponibles</p>
+        <ProductList
+          productsData={productsData}
+          handleAddToCart={handleAddToCart}
+        />
+      </Container>
+
+      <Container title="Productos sugeridos">
+        <p style={{ fontSize: '1.5rem' }}>Explora nuestra selección de productos sugerido</p>
+        <ProductList
+          productsData={productsData.slice(0, 2)}
+          handleAddToCart={handleAddToCart}
+        />
+      </Container>
     </>
   )
 }
