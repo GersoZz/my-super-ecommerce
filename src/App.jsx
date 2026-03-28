@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import ProductCard from './components/ProductCard'
 import PromoBanner from './components/PromoBanner'
+import Header from './components/Header'
 
 function App() {
   const [showPromo, setShowPromo] = useState(true)
@@ -32,6 +33,7 @@ function App() {
 
   return (
     <>
+      <Header />
       {showPromo && (
         <PromoBanner
           onClose={onClosePromo}
