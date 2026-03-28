@@ -1,6 +1,6 @@
 import './Header.css'
 
-const Header = () => {
+const Header = ({ cartCount }) => {
   return (
     <header className="header">
       <div className="header-container">
@@ -21,7 +21,7 @@ const Header = () => {
               strokeLinejoin="round"
             />
           </svg>
-          <span className="cart-count">0</span>
+          <span className="cart-count">{cartCount}</span>
         </div>
       </div>
     </header>

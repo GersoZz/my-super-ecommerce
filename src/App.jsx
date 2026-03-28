@@ -5,6 +5,7 @@ import PromoBanner from './components/PromoBanner'
 import Header from './components/Header'
 
 function App() {
+  const [cartCount, setCartCount] = useState(0)
   const [showPromo, setShowPromo] = useState(true)
 
   const productsData = [
@@ -31,9 +32,14 @@ function App() {
     setShowPromo(false)
   }
 
+  const handleAddToCart = (isAdded) => {
+    if (isAdded === true) setCartCount(cartCount + 1)
+    if (isAdded === false) setCartCount(cartCount - 1)
+  }
+
   return (
     <>
-      <Header />
+      <Header cartCount={cartCount} />
       {showPromo && (
         <PromoBanner
           onClose={onClosePromo}
@@ -48,6 +54,7 @@ function App() {
             description={product.description}
             price={product.price}
             imageUrl={product.imageUrl}
+            handleAddToCart={handleAddToCart}
           />
         ))}
       </div>

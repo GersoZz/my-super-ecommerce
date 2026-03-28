@@ -2,8 +2,13 @@ import { useState } from 'react'
 import './ProductCard.css'
 
 // props
-function ProductCard({ title, description, price, imageUrl = 'https://picsum.photos/600/400' }) {
+function ProductCard({ title, description, price, imageUrl = 'https://picsum.photos/600/400', handleAddToCart }) {
   const [isAdded, setIsAdded] = useState(false)
+
+  const handleClick = () => {
+    setIsAdded(!isAdded)
+    handleAddToCart(!isAdded)
+  }
 
   return (
     <div
@@ -23,7 +28,7 @@ function ProductCard({ title, description, price, imageUrl = 'https://picsum.pho
         <p className="card-footer">
           <span className="card-price">${price}</span>
           <button
-            onClick={() => setIsAdded(!isAdded)}
+            onClick={handleClick}
             className={isAdded ? 'card-button added' : 'card-button'}
           >
             {isAdded ? 'Agregado' : 'Agregar'}
