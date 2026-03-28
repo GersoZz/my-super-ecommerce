@@ -6,8 +6,15 @@ function ProductCard({ title, description, price, imageUrl = 'https://picsum.pho
   const [isAdded, setIsAdded] = useState(false)
 
   return (
-    <div id="card-01" className="card">
-      <img src={imageUrl} alt={title} className="card-image" />
+    <div
+      id="card-01"
+      className="card"
+    >
+      <img
+        src={imageUrl}
+        alt={title}
+        className="card-image"
+      />
 
       <div className="card-content">
         <h3 className="card-title">{title}</h3>
@@ -15,7 +22,10 @@ function ProductCard({ title, description, price, imageUrl = 'https://picsum.pho
 
         <p className="card-footer">
           <span className="card-price">${price}</span>
-          <button onClick={() => setIsAdded(!isAdded)} className={isAdded ? 'card-button added' : 'card-button'}>
+          <button
+            onClick={() => setIsAdded(!isAdded)}
+            className={isAdded ? 'card-button added' : 'card-button'}
+          >
             {isAdded ? 'Agregado' : 'Agregar'}
           </button>
         </p>
