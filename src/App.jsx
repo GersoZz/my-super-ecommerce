@@ -4,6 +4,7 @@ import PromoBanner from './components/PromoBanner'
 import Header from './components/Header'
 import ProductList from './components/ProductList'
 import Container from './components/Container'
+import { productAdapter } from './adapters/products.adapter'
 
 function App() {
   const [showPromo, setShowPromo] = useState(true)
@@ -16,63 +17,21 @@ function App() {
     fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=6')
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
-
-        const productsAdapteds = data.map((product) => {
-          const { id, title, description, price, images } = product
-
-          const productAdapted = {
-            id: id,
-            title: title,
-            description: description,
-            price: price,
-            imageUrl: images[0],
-          }
-          return productAdapted
-        })
-
+        const productsAdapteds = data.map((e) => productAdapter(e))
         setProductsData(productsAdapteds)
       })
 
     fetch('https://api.escuelajs.co/api/v1/products?offset=6&limit=6')
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
-
-        const productsAdapteds = data.map((product) => {
-          const { id, title, description, price, images } = product
-
-          const productAdapted = {
-            id: id,
-            title: title,
-            description: description,
-            price: price,
-            imageUrl: images[0],
-          }
-          return productAdapted
-        })
-
+        const productsAdapteds = data.map(productAdapter)
         setProductsSuggestedData(productsAdapteds)
       })
 
     fetch('https://api.escuelajs.co/api/v1/products?offset=12&limit=3')
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
-
-        const productsAdapteds = data.map((product) => {
-          const { id, title, description, price, images } = product
-
-          const productAdapted = {
-            id: id,
-            title: title,
-            description: description,
-            price: price,
-            imageUrl: images[0],
-          }
-          return productAdapted
-        })
-
+        const productsAdapteds = data.map(productAdapter)
         setProductsBestSellerData(productsAdapteds)
       })
   }, [])
