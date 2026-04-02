@@ -15,6 +15,8 @@ function App() {
   const [productsBestSellerData, setProductsBestSellerData] = useState([])
 
   const [isLoading, setIsLoading] = useState(true)
+  const [isLoadingSuggested, setIsLoadingSuggested] = useState(true)
+  const [isLoadingBestSeller, setIsLoadingBestSeller] = useState(true)
 
   useEffect(() => {
     fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=6')
@@ -22,24 +24,26 @@ function App() {
       .then((data) => {
         const productsAdapteds = data.map((e) => productAdapter(e))
         setProductsData(productsAdapteds)
-        setIsLoading(false)
       })
+      .finally(() => setIsLoading(false))
 
     fetch('https://api.escuelajs.co/api/v1/products?offset=6&limit=6')
       .then((res) => res.json())
       .then((data) => {
         const productsAdapteds = data.map(productAdapter)
         setProductsSuggestedData(productsAdapteds)
-        setIsLoading(false)
+        setIsLoadingSuggested(false)
       })
+      .finally(() => setIsLoadingSuggested(false))
 
     fetch('https://api.escuelajs.co/api/v1/products?offset=12&limit=3')
       .then((res) => res.json())
       .then((data) => {
         const productsAdapteds = data.map(productAdapter)
         setProductsBestSellerData(productsAdapteds)
-        setIsLoading(false)
+        setIsLoadingBestSeller(false)
       })
+      .finally(() => setIsLoadingBestSeller(false))
   }, [])
 
   const onClosePromo = () => {
@@ -63,12 +67,12 @@ function App() {
 
       <Container title="Productos sugeridos">
         <p style={{ fontSize: '1.5rem' }}>Explora nuestra selección de productos sugerido</p>
-        {isLoading ? <Loader /> : <ProductList productsData={productsSuggestedData} />}
+        {isLoadingSuggested ? <Loader /> : <ProductList productsData={productsSuggestedData} />}
       </Container>
 
       <Container title="Productos más vendidos">
         <p style={{ fontSize: '1.5rem' }}>Explora nuestra selección de productos más vendidos</p>
-        {isLoading ? <Loader /> : <ProductList productsData={productsBestSellerData} />}
+        {isLoadingBestSeller ? <Loader /> : <ProductList productsData={productsBestSellerData} />}
       </Container>
     </>
   )
