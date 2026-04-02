@@ -14,7 +14,22 @@ function App() {
     fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=6')
       .then((res) => res.json())
       .then((data) => {
-        setProductsData(data)
+        console.log(data)
+
+        const productsAdapteds = data.map((product) => {
+          const { id, title, description, price, images } = product
+
+          const productAdapted = {
+            id: id,
+            title: title,
+            description: description,
+            price: price,
+            imageUrl: images[0],
+          }
+          return productAdapted
+        })
+
+        setProductsData(productsAdapteds)
       })
   }, [])
 
