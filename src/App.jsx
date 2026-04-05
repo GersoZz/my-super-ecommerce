@@ -6,27 +6,20 @@ import ProductList from './components/ProductList'
 import Container from './components/Container'
 import { productAdapter } from './adapters/products.adapter'
 import Loader from './components/Loader'
+import useFetch from './hooks/useFetch'
 
 function App() {
   const [showPromo, setShowPromo] = useState(true)
 
-  const [productsData, setProductsData] = useState([])
   const [productsSuggestedData, setProductsSuggestedData] = useState([])
   const [productsBestSellerData, setProductsBestSellerData] = useState([])
 
-  const [isLoading, setIsLoading] = useState(true)
   const [isLoadingSuggested, setIsLoadingSuggested] = useState(true)
   const [isLoadingBestSeller, setIsLoadingBestSeller] = useState(true)
 
-  useEffect(() => {
-    fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=6')
-      .then((res) => res.json())
-      .then((data) => {
-        const productsAdapteds = data.map((e) => productAdapter(e))
-        setProductsData(productsAdapteds)
-      })
-      .finally(() => setIsLoading(false))
+  const { productsData, isLoading } = useFetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=6')
 
+  useEffect(() => {
     fetch('https://api.escuelajs.co/api/v1/products?offset=6&limit=6')
       .then((res) => res.json())
       .then((data) => {
