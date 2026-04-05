@@ -1,21 +1,19 @@
 import { useEffect, useState } from 'react'
-import { productAdapter } from '../adapters/products.adapter'
 
 function useFetch(url) {
-  const [productsData, setProductsData] = useState([])
+  const [data, setData] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     fetch(url)
-      .then((res) => res.json())
+      .then((response) => response.json())
       .then((data) => {
-        const productsAdapteds = data.map((e) => productAdapter(e))
-        setProductsData(productsAdapteds)
+        setData(data)
       })
       .finally(() => setIsLoading(false))
   }, [])
 
-  return { productsData, isLoading }
+  return { data, isLoading }
 }
 
 export default useFetch
