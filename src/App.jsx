@@ -11,33 +11,17 @@ import useFetch from './hooks/useFetch'
 function App() {
   const [showPromo, setShowPromo] = useState(true)
 
-  const [productsSuggestedData, setProductsSuggestedData] = useState([])
-  const [productsBestSellerData, setProductsBestSellerData] = useState([])
+  const { productsData: productsAvailableData, isLoading: isLoadingAvailable } = useFetch(
+    'https://api.escuelajs.co/api/v1/products?offset=0&limit=6',
+  )
 
-  const [isLoadingSuggested, setIsLoadingSuggested] = useState(true)
-  const [isLoadingBestSeller, setIsLoadingBestSeller] = useState(true)
+  const { productsData: productsSuggestedData, isLoading: isLoadingSuggested } = useFetch(
+    'https://api.escuelajs.co/api/v1/products?offset=6&limit=6',
+  )
 
-  const { productsData, isLoading } = useFetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=6')
-
-  useEffect(() => {
-    fetch('https://api.escuelajs.co/api/v1/products?offset=6&limit=6')
-      .then((res) => res.json())
-      .then((data) => {
-        const productsAdapteds = data.map(productAdapter)
-        setProductsSuggestedData(productsAdapteds)
-        setIsLoadingSuggested(false)
-      })
-      .finally(() => setIsLoadingSuggested(false))
-
-    fetch('https://api.escuelajs.co/api/v1/products?offset=12&limit=3')
-      .then((res) => res.json())
-      .then((data) => {
-        const productsAdapteds = data.map(productAdapter)
-        setProductsBestSellerData(productsAdapteds)
-        setIsLoadingBestSeller(false)
-      })
-      .finally(() => setIsLoadingBestSeller(false))
-  }, [])
+  const { productsData: productsBestSellerData, isLoading: isLoadingBestSeller } = useFetch(
+    'https://api.escuelajs.co/api/v1/products?offset=12&limit=3',
+  )
 
   const onClosePromo = () => {
     setShowPromo(false)
@@ -55,7 +39,7 @@ function App() {
 
       <Container title="Productos disponibles">
         <p style={{ fontSize: '1.5rem' }}>Explora nuestra selección de productos disponibles</p>
-        {isLoading ? <Loader /> : <ProductList productsData={productsData} />}
+        {isLoadingAvailable ? <Loader /> : <ProductList productsData={productsAvailableData} />}
       </Container>
 
       <Container title="Productos sugeridos">
