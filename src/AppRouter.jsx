@@ -1,25 +1,17 @@
 import { Route, Routes } from 'react-router-dom'
-import { HomePage, AboutPage, CartPage, AddProductPage } from './pages'
-
+import routes from './routerConfig'
 function AppRouter() {
   return (
     <Routes>
-      <Route
-        path="/"
-        element={<HomePage />}
-      />
-      <Route
-        path="/about"
-        element={<AboutPage />}
-      />
-      <Route
-        path="/cart"
-        element={<CartPage />}
-      />
-      <Route
-        path="/add-product"
-        element={<AddProductPage />}
-      />
+      {routes.map((route, index) => {
+        return (
+          <Route
+            key={index}
+            path={route.path}
+            element={route.element}
+          />
+        )
+      })}
     </Routes>
   )
 }
