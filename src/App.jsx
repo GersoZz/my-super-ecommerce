@@ -7,21 +7,28 @@ import Container from './components/Container'
 import { productAdapter } from './adapters/products.adapter'
 import Loader from './components/Loader'
 import useFetch from './hooks/useFetch'
+import ErrorMessage from './components/ErrorMessage'
 
 function App() {
   const [showPromo, setShowPromo] = useState(true)
 
-  const { data: productsAvailableRawData, isLoading: isLoadingAvailable } = useFetch(
-    'https://api.escuelajs.co/api/v1/products?offset=0&limit=6',
-  )
+  const {
+    data: productsAvailableRawData,
+    isLoading: isLoadingAvailable,
+    error: errorAvailable,
+  } = useFetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=6')
 
-  const { data: productsSuggestedRawData, isLoading: isLoadingSuggested } = useFetch(
-    'https://api.escuelajs.co/api/v1/products?offset=6&limit=6',
-  )
+  const {
+    data: productsSuggestedRawData,
+    isLoading: isLoadingSuggested,
+    error: errorSuggested,
+  } = useFetch('https://api.escuelajs.co/api/v1/products?offset=6&limit=6')
 
-  const { data: productsBestSellerRawData, isLoading: isLoadingBestSeller } = useFetch(
-    'https://api.escuelajs.co/api/v1/products?offset=12&limit=3',
-  )
+  const {
+    data: productsBestSellerRawData,
+    isLoading: isLoadingBestSeller,
+    error: errorBestSeller,
+  } = useFetch('https://api.escuelajs.co/api/v1/products?offset=12&limit=3')
 
   const productsAvailableData = productsAvailableRawData === null ? [] : productsAvailableRawData.map(productAdapter)
   const productsSuggestedData = productsSuggestedRawData === null ? [] : productsSuggestedRawData.map(productAdapter)
@@ -41,20 +48,29 @@ function App() {
         />
       )}
 
-      <Container title="Productos disponibles">
-        <p style={{ fontSize: '1.5rem' }}>Explora nuestra selección de productos disponibles</p>
-        {isLoadingAvailable ? <Loader /> : <ProductList productsData={productsAvailableData} />}
-      </Container>
+      {errorAvailable && <ErrorMessage message={'No se pudo cargar los productos disponibles'} />}
+      {errorSuggested && <ErrorMessage message={'No se pudo cargar los productos sugeridos'} />}
+      {errorBestSeller && <ErrorMessage message={'No se pudo cargar los productos más vendidos'} />}
 
-      <Container title="Productos sugeridos">
-        <p style={{ fontSize: '1.5rem' }}>Explora nuestra selección de productos sugerido</p>
-        {isLoadingSuggested ? <Loader /> : <ProductList productsData={productsSuggestedData} />}
-      </Container>
+      {!errorAvailable && (
+        <Container title="Productos disponibles">
+          <p style={{ fontSize: '1.5rem' }}>Explora nuestra selección de productos disponibles</p>
+          {isLoadingAvailable ? <Loader /> : <ProductList productsData={productsAvailableData} />}
+        </Container>
+      )}
 
-      <Container title="Productos más vendidos">
-        <p style={{ fontSize: '1.5rem' }}>Explora nuestra selección de productos más vendidos</p>
-        {isLoadingBestSeller ? <Loader /> : <ProductList productsData={productsBestSellerData} />}
-      </Container>
+      {!errorSuggested && (
+        <Container title="Productos sugeridos">
+          <p style={{ fontSize: '1.5rem' }}>Explora nuestra selección de productos sugerido</p>
+          {isLoadingSuggested ? <Loader /> : <ProductList productsData={productsSuggestedData} />}
+        </Container>
+      )}
+      {!errorBestSeller && (
+        <Container title="Productos más vendidos">
+          <p style={{ fontSize: '1.5rem' }}>Explora nuestra selección de productos más vendidos</p>
+          {isLoadingBestSeller ? <Loader /> : <ProductList productsData={productsBestSellerData} />}
+        </Container>
+      )}
     </>
   )
 }
