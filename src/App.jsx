@@ -8,6 +8,7 @@ import { productAdapter } from './adapters/products.adapter'
 import Loader from './components/Loader'
 import useFetch from './hooks/useFetch'
 import ErrorMessage from './components/ErrorMessage'
+import { API_ENDPOINTS } from './utils/constant'
 
 function App() {
   const [showPromo, setShowPromo] = useState(true)
@@ -16,19 +17,19 @@ function App() {
     data: productsAvailableRawData,
     isLoading: isLoadingAvailable,
     error: errorAvailable,
-  } = useFetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=6')
+  } = useFetch(API_ENDPOINTS.PRODUCTS_AVAILABLE)
 
   const {
     data: productsSuggestedRawData,
     isLoading: isLoadingSuggested,
     error: errorSuggested,
-  } = useFetch('https://api.escuelajs.co/api/v1/products?offset=6&limit=6')
+  } = useFetch(API_ENDPOINTS.PRODUCTS_SUGGESTED)
 
   const {
     data: productsBestSellerRawData,
     isLoading: isLoadingBestSeller,
     error: errorBestSeller,
-  } = useFetch('https://api.escuelajs.co/api/v1/products?offset=12&limit=3')
+  } = useFetch(API_ENDPOINTS.PRODUCTS_BEST_SELLER)
 
   const productsAvailableData = productsAvailableRawData === null ? [] : productsAvailableRawData.map(productAdapter)
   const productsSuggestedData = productsSuggestedRawData === null ? [] : productsSuggestedRawData.map(productAdapter)
