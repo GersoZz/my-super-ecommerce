@@ -1,6 +1,8 @@
+import React from 'react'
 import HomePage from './HomePage'
-import AboutPage from './AboutPage'
-import CartPage from './CartPage'
-import AddProductPage from './AddProductPage'
 
-export { HomePage, AboutPage, CartPage, AddProductPage }
+export const AboutPage = React.lazy(() => import('./AboutPage'))
+export const CartPage = React.lazy(() => import('./CartPage'))
+export const AddProductPage = React.lazy(() => import('./AddProductPage'))
+
+export { HomePage }
