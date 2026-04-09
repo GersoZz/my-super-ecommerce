@@ -8,6 +8,7 @@ export const ProductDetailPage = React.lazy(() => import('./ProductDetailPage'))
 
 export const AboutPage = React.lazy(() => import('./AboutPage'))
 export const AddProductPage = React.lazy(() => import('./AddProductPage'))
+export const SearchResultsPage = React.lazy(() => import('./SearchResultsPage'))
 
 export const CartPage = React.lazy(async () => {
   await delay(2000)

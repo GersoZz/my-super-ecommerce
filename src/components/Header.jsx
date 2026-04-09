@@ -2,17 +2,19 @@ import { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
 import './Header.css'
 
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
 const Header = () => {
   const { cartCount } = useContext(CartContext)
+  const navigate = useNavigate()
 
   const [searchInput, setSearchInput] = useState('')
 
   const handleSearch = (event) => {
     event.preventDefault()
     console.log(`Navegando hacia /search?q=${searchInput.trim()}`)
+    navigate(`/search?q=${searchInput.trim()}`)
     setSearchInput('')
   }
 
