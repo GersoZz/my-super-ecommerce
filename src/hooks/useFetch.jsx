@@ -7,7 +7,13 @@ function useFetch(url) {
 
   useEffect(() => {
     fetch(url)
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok === false) {
+          throw new Error('Petición fallida')
+        }
+
+        return response.json()
+      })
       .then((data) => {
         setData(data)
       })
