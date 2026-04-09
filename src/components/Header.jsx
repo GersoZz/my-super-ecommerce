@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
 import './Header.css'
 
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 const Header = () => {
   const { cartCount } = useContext(CartContext)
@@ -19,24 +19,24 @@ const Header = () => {
           </Link>
         </div>
         <nav className="header-nav">
-          <Link
+          <NavLink
             to="/"
-            className="nav-link"
+            className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
           >
             Home
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/about"
-            className="nav-link"
+            className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
           >
             About
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/add-product"
-            className="nav-link"
+            className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
           >
             Add Product
-          </Link>
+          </NavLink>
         </nav>
         <Link
           to="/cart"
