@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import './Header.css'
 import { CartContext } from '../context/CartContext'
+import './Header.css'
 
 const Header = () => {
   const { cartCount } = useContext(CartContext)
@@ -8,8 +8,38 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-container">
-        <h1 className="header-logo">ShopStore</h1>
-        <div className="header-cart">
+        <div className="header-left">
+          <a
+            href="/"
+            className="header-logo"
+          >
+            ShopStore
+          </a>
+        </div>
+        <nav className="header-nav">
+          <a
+            href="/"
+            className="nav-link"
+          >
+            Home
+          </a>
+          <a
+            href="/about"
+            className="nav-link"
+          >
+            About
+          </a>
+          <a
+            href="/add-product"
+            className="nav-link"
+          >
+            Add Product
+          </a>
+        </nav>
+        <a
+          href="/cart"
+          className="header-cart"
+        >
           <svg
             width="36px"
             height="36px"
@@ -26,7 +56,7 @@ const Header = () => {
             />
           </svg>
           <span className="cart-count">{cartCount}</span>
-        </div>
+        </a>
       </div>
     </header>
   )

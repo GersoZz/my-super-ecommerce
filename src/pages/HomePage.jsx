@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
 import PromoBanner from '../components/PromoBanner'
-import Header from '../components/Header'
 import ProductList from '../components/ProductList'
 import Container from '../components/Container'
 import { productAdapter } from '../adapters/products.adapter'
@@ -41,7 +40,6 @@ function HomePage() {
 
   return (
     <>
-      <Header />
       {showPromo && (
         <PromoBanner
           onClose={onClosePromo}
