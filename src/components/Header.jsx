@@ -3,9 +3,18 @@ import { CartContext } from '../context/CartContext'
 import './Header.css'
 
 import { Link, NavLink } from 'react-router-dom'
+import { useState } from 'react'
 
 const Header = () => {
   const { cartCount } = useContext(CartContext)
+
+  const [searchInput, setSearchInput] = useState('')
+
+  const handleSearch = (event) => {
+    event.preventDefault()
+    console.log(`Navegando hacia /search?q=${searchInput.trim()}`)
+    setSearchInput('')
+  }
 
   return (
     <header className="header">
@@ -38,6 +47,25 @@ const Header = () => {
             Add Product
           </NavLink>
         </nav>
+        <form
+          onSubmit={handleSearch}
+          className="header-search"
+        >
+          <input
+            type="text"
+            placeholder="Buscar productos..."
+            className="search-input"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
+          <button
+            type="submit"
+            className="search-button"
+            disabled={searchInput.trim() === ''}
+          >
+            🍳
+          </button>
+        </form>
         <Link
           to="/cart"
           className="header-cart"
