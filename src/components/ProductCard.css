@@ -24,6 +24,11 @@
   color: #333;
 }
 
+.card-link:hover {
+  background: #41c74a;
+  transition: background 0.2s ease-in-out;
+}
+
 .card-text {
   font-size: 0.9rem;
   color: #666;

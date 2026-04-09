@@ -4,6 +4,8 @@ import HomePage from './HomePage'
 // Promesa
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
+export const ProductDetailPage = React.lazy(() => import('./ProductDetailPage'))
+
 export const AboutPage = React.lazy(() => import('./AboutPage'))
 export const AddProductPage = React.lazy(() => import('./AddProductPage'))
 
