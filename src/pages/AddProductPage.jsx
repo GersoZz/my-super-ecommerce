@@ -9,6 +9,23 @@ function AddProductPage() {
   const categories = Array.isArray(rawCategories) ? rawCategories : []
   const categoriesError = error ? 'No se pudieron cargar las categorías' : null
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const formData = new FormData(e.target)
+    // const productData = Object.fromEntries(formData.entries())
+
+    const productData = {
+      title: formData.get('title'),
+      price: parseFloat(formData.get('price')),
+      description: formData.get('description'),
+      categoryId: parseInt(formData.get('categoryId')),
+      images: [formData.get('imageUrl')],
+    }
+
+    console.log('🚀 ~ handleSubmit ~ productData:', productData)
+  }
+
   return (
     <div className="add-product-page">
       <div className="add-product-card">
@@ -17,7 +34,10 @@ function AddProductPage() {
           <h1>Agregar nuevo producto</h1>
           <p className="add-product-subtitle">Completa los datos del producto para publicarlo en la tienda.</p>
         </div>
-        <form className="add-product-form">
+        <form
+          className="add-product-form"
+          onSubmit={handleSubmit}
+        >
           <div className="form-grid">
             <div className="form-field">
               <label htmlFor="title">Título</label>
