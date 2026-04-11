@@ -1,13 +1,24 @@
 import './AddProductPage.css'
 import { API_ENDPOINTS } from '../utils/constant'
 import useFetch from '../hooks/useFetch'
+import usePost from '../hooks/usePost'
+import { useEffect, useState } from 'react'
 
 function AddProductPage() {
+  const [formKey, setFormKey] = useState(0)
+
   const { data: rawCategories, isLoading: isLoadingCategories, error } = useFetch(API_ENDPOINTS.CATEGORIES)
   // Ctrl Alt L
 
   const categories = Array.isArray(rawCategories) ? rawCategories : []
   const categoriesError = error ? 'No se pudieron cargar las categorías' : null
+
+  const {
+    execute: createProduct,
+    data: createdProduct,
+    isLoading: submitting,
+    error: submitError,
+  } = usePost(API_ENDPOINTS.PRODUCTS)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -24,7 +35,15 @@ function AddProductPage() {
     }
 
     console.log('🚀 ~ handleSubmit ~ productData:', productData)
+
+    createProduct(productData)
   }
+
+  useEffect(() => {
+    if (createdProduct === null) return
+
+    setFormKey((prevKey) => prevKey + 1)
+  }, [createdProduct])
 
   return (
     <div className="add-product-page">
@@ -37,6 +56,7 @@ function AddProductPage() {
         <form
           className="add-product-form"
           onSubmit={handleSubmit}
+          key={formKey}
         >
           <div className="form-grid">
             <div className="form-field">
@@ -115,16 +135,21 @@ function AddProductPage() {
             <button
               type="submit"
               className="primary-button"
+              disabled={submitting}
             >
-              Guardar producto
+              {submitting ? 'Guardando...' : 'Guardar producto'}
             </button>
             <button
               type="reset"
               className="secondary-button"
+              disabled={submitting}
             >
               Limpiar
             </button>
           </div>
+          {createdProduct !== null && <div className="submit-message success">Producto creado con éxito</div>}
+
+          {submitError !== null && <div className="submit-message error"> Producto no creado</div>}
         </form>
       </div>
     </div>
