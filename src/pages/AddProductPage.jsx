@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react'
 
 function AddProductPage() {
   const [formKey, setFormKey] = useState(0)
+  const [titleValue, setTitleValue] = useState('')
+  const [titleError, setTitleError] = useState('')
 
   const { data: rawCategories, isLoading: isLoadingCategories, error } = useFetch(API_ENDPOINTS.CATEGORIES)
   // Ctrl Alt L
@@ -23,6 +25,11 @@ function AddProductPage() {
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    if (titleValue.trim().length < 6) {
+      setTitleError('El título debe tener al menos 6 caracteres')
+      return
+    }
+
     const formData = new FormData(e.target)
     // const productData = Object.fromEntries(formData.entries())
 
@@ -37,6 +44,22 @@ function AddProductPage() {
     console.log('🚀 ~ handleSubmit ~ productData:', productData)
 
     createProduct(productData)
+  }
+
+  const handleTitleChange = (event) => {
+    const value = event.target.value
+    setTitleValue(value)
+
+    if (value.trim().length < 6) {
+      setTitleError('El título debe tener al menos 6 caracteres')
+    } else {
+      setTitleError('')
+    }
+  }
+
+  const handleReset = () => {
+    setTitleValue('')
+    setTitleError('')
   }
 
   useEffect(() => {
@@ -56,6 +79,7 @@ function AddProductPage() {
         <form
           className="add-product-form"
           onSubmit={handleSubmit}
+          onReset={handleReset}
           key={formKey}
         >
           <div className="form-grid">
@@ -66,8 +90,11 @@ function AddProductPage() {
                 id="title"
                 name="title"
                 placeholder="Zapatillas Voladoras"
+                value={titleValue}
+                onChange={handleTitleChange}
                 required
               />
+              {titleError && <p className="error-message">{titleError}</p>}
             </div>
             <div className="form-field">
               <label htmlFor="price">Precio</label>
@@ -135,7 +162,7 @@ function AddProductPage() {
             <button
               type="submit"
               className="primary-button"
-              disabled={submitting}
+              disabled={submitting || titleError}
             >
               {submitting ? 'Guardando...' : 'Guardar producto'}
             </button>
