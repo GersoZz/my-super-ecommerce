@@ -8,6 +8,7 @@ function AddProductPage() {
   const [formKey, setFormKey] = useState(0)
   const [titleValue, setTitleValue] = useState('')
   const [titleError, setTitleError] = useState('')
+  const [titleTouched, setTitleTouched] = useState(false)
 
   const { data: rawCategories, isLoading: isLoadingCategories, error } = useFetch(API_ENDPOINTS.CATEGORIES)
   // Ctrl Alt L
@@ -57,9 +58,20 @@ function AddProductPage() {
     }
   }
 
+  const handleTitleBlur = () => {
+    setTitleTouched(true)
+
+    if (titleValue.trim().length < 6) {
+      setTitleError('El título debe tener al menos 6 caracteres')
+    } else {
+      setTitleError('')
+    }
+  }
+
   const handleReset = () => {
     setTitleValue('')
     setTitleError('')
+    setTitleTouched(false)
   }
 
   useEffect(() => {
@@ -92,9 +104,10 @@ function AddProductPage() {
                 placeholder="Zapatillas Voladoras"
                 value={titleValue}
                 onChange={handleTitleChange}
+                onBlur={handleTitleBlur}
                 required
               />
-              {titleError && <p className="error-message">{titleError}</p>}
+              {titleTouched && titleError && <p className="error-message">{titleError}</p>}
             </div>
             <div className="form-field">
               <label htmlFor="price">Precio</label>
