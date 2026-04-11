@@ -5,4 +5,5 @@ export const API_ENDPOINTS = {
   PRODUCTS_AVAILABLE: `${API_BASE_URL}/products?offset=0&limit=6`,
   PRODUCTS_SUGGESTED: `${API_BASE_URL}/products?offset=6&limit=6`,
   PRODUCTS_BEST_SELLER: `${API_BASE_URL}/products?offset=12&limit=3`,
+  CATEGORIES: `${API_BASE_URL}/categories`,
 }
