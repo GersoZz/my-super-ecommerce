@@ -7,7 +7,7 @@ import { productAdapter } from '../adapters/products.adapter'
 import { CartContext } from '../context/CartContext'
 import Loader from '../components/Loader'
 import ErrorMessage from '../components/ErrorMessage'
-import './ProductDetailPage.css'
+import productDetailStyles from './ProductDetailPage.module.css'
 
 function ProductDetailPage() {
   const { productId } = useParams()
@@ -43,19 +43,19 @@ function ProductDetailPage() {
   const { title, price, description, imageUrl } = productAdapter(data)
 
   return (
-    <div className="product-detail">
+    <div className={productDetailStyles.productDetail}>
       <img
         src={imageUrl}
         alt={title}
-        className="product-detail-image"
+        className={productDetailStyles.productDetailImage}
       />
 
-      <div className="product-detail-info">
-        <h1 className="product-detail-title">{title}</h1>
-        <p className="product-detail-description">{description}</p>
-        <span className="product-detail-price">${price}</span>
+      <div className={productDetailStyles.productDetailInfo}>
+        <h1 className={productDetailStyles.productDetailTitle}>{title}</h1>
+        <p className={productDetailStyles.productDetailDescription}>{description}</p>
+        <span className={productDetailStyles.productDetailPrice}>${price}</span>
         <button
-          className={`card-button ${isAdded ? 'added' : ''}`}
+          className={`${productDetailStyles['card-button']} ${isAdded ? productDetailStyles.added : ''}`}
           onClick={handleClick}
         >
           {isAdded ? 'Agregado al carrito' : 'Agregar al carrito'}
