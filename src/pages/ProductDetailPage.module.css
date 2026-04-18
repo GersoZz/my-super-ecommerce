@@ -42,7 +42,12 @@
   color: #2a9d8f;
 }
 
+.borderGreen {
+  border: 1px solid #2a9d8f;
+}
+
 .card-button {
+  composes: borderGreen;
   background-color: #47ff72;
   color: white;
   border: none;
