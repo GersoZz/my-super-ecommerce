@@ -42,8 +42,8 @@
   color: #2a9d8f;
 }
 
-.product-detail-button {
-  background-color: #007bff;
+.card-button {
+  background-color: #47ff72;
   color: white;
   border: none;
   padding: 14px 28px;
@@ -56,15 +56,15 @@
   transition: background-color 0.2s ease-in-out;
 }
 
-.product-detail-button:hover {
+.card-button:hover {
   background-color: #0056b3;
 }
 
-.product-detail-button.added {
+.card-button.added {
   background-color: #28a745;
 }
 
-.product-detail-button.added:hover {
+.card-button.added:hover {
   background-color: #1e7e34;
 }
 

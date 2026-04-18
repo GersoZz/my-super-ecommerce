@@ -55,7 +55,7 @@ function ProductDetailPage() {
         <p className="product-detail-description">{description}</p>
         <span className="product-detail-price">${price}</span>
         <button
-          className={`product-detail-button ${isAdded ? 'added' : ''}`}
+          className={`card-button ${isAdded ? 'added' : ''}`}
           onClick={handleClick}
         >
           {isAdded ? 'Agregado al carrito' : 'Agregar al carrito'}
