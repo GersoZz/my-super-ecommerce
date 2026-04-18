@@ -1,3 +1,5 @@
+@import 'tailwindcss';
+
 :root {
   --header-height: 65px;
   --promo-height: 20px;
