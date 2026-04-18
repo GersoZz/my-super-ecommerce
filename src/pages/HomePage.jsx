@@ -38,6 +38,8 @@ function HomePage() {
     setShowPromo(false)
   }
 
+  const containerDescription = { fontSize: '1.5rem' }
+
   return (
     <>
       {showPromo && (
@@ -53,20 +55,20 @@ function HomePage() {
 
       {!errorAvailable && (
         <Container title="Productos disponibles">
-          <p style={{ fontSize: '1.5rem' }}>Explora nuestra selección de productos disponibles</p>
+          <p style={containerDescription}>Explora nuestra selección de productos disponibles</p>
           {isLoadingAvailable ? <Loader /> : <ProductList productsData={productsAvailableData} />}
         </Container>
       )}
 
       {!errorSuggested && (
         <Container title="Productos sugeridos">
-          <p style={{ fontSize: '1.5rem' }}>Explora nuestra selección de productos sugerido</p>
+          <p style={containerDescription}>Explora nuestra selección de productos sugerido</p>
           {isLoadingSuggested ? <Loader /> : <ProductList productsData={productsSuggestedData} />}
         </Container>
       )}
       {!errorBestSeller && (
         <Container title="Productos más vendidos">
-          <p style={{ fontSize: '1.5rem' }}>Explora nuestra selección de productos más vendidos</p>
+          <p style={containerDescription}>Explora nuestra selección de productos más vendidos</p>
           {isLoadingBestSeller ? <Loader /> : <ProductList productsData={productsBestSellerData} />}
         </Container>
       )}
