@@ -78,6 +78,7 @@ function AddProductPage() {
     if (createdProduct === null) return
 
     setFormKey((prevKey) => prevKey + 1)
+    handleReset()
   }, [createdProduct])
 
   return (
