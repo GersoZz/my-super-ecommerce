@@ -110,6 +110,7 @@
   border-radius: 4px;
   font-size: 0.95rem;
   width: 100%;
+  background-color: #fff;
 }
 
 .search-input::placeholder {
